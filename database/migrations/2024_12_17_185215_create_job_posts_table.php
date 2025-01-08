@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\JobPostStateEnum;
 use App\Enums\JobTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,7 +20,8 @@ return new class extends Migration
             $table->text('requirements');
             $table->decimal('salary')->nullable();
             $table->enum('job_type', JobTypeEnum::values());
-            $table->enum('state', JobTypeEnum::values());
+            $table->enum('state', JobPostStateEnum::values())
+                ->default(JobPostStateEnum::Open);
 
             $table->foreignId('recruiter_id')->constrained();
             $table->foreignId('category_id')->constrained();

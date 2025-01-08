@@ -13,7 +13,7 @@ class JobPostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class JobPostPolicy
      */
     public function view(User $user, JobPost $jobPost): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class JobPostPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class JobPostPolicy
      */
     public function update(User $user, JobPost $jobPost): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class JobPostPolicy
      */
     public function delete(User $user, JobPost $jobPost): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class JobPostPolicy
      */
     public function restore(User $user, JobPost $jobPost): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class JobPostPolicy
      */
     public function forceDelete(User $user, JobPost $jobPost): bool
     {
-        return false;
+        return true;
     }
 }

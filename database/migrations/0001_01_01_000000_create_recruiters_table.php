@@ -15,16 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('company_name');
             $table->string('company_website');
-
-            $table->foreignId('user_id')
-                ->constrained('users');
-
-            $table->foreignId('industry_id')
-                ->constrained();
-
-            $table->foreignId('city')
-                ->constrained('cities');
-
+            $table->text('description');
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
             $table->timestamps();
         });
     }
