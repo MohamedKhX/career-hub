@@ -17,6 +17,11 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\ApplicationsChart;
+use App\Filament\Widgets\UsersChart;
+use App\Filament\Widgets\TopCategoriesChart;
+use App\Filament\Widgets\TopCitiesChart;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -45,8 +50,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                StatsOverview::class,
+                ApplicationsChart::class,
+                UsersChart::class,
+                TopCategoriesChart::class,
+                TopCitiesChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,
