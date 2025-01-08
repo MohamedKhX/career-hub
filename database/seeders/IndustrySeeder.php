@@ -2,16 +2,33 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Industry;
 use Illuminate\Database\Seeder;
 
 class IndustrySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        $industries = [
+            'تكنولوجيا المعلومات',
+            'النفط والغاز',
+            'البناء والتشييد',
+            'التعليم',
+            'الرعاية الصحية',
+            'الخدمات المالية',
+            'التجارة والبيع بالتجزئة',
+            'السياحة والضيافة',
+            'الاتصالات',
+            'النقل والخدمات اللوجستية',
+            'الصناعات الغذائية',
+            'الإعلام والترفيه',
+            'العقارات',
+            'الزراعة',
+            'الخدمات الحكومية',
+        ];
+
+        foreach ($industries as $industryName) {
+            Industry::create(['name' => $industryName]);
+        }
     }
 }

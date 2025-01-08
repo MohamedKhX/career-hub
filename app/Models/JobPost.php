@@ -21,7 +21,8 @@ class JobPost extends Model implements HasMedia
 
     protected $casts = [
         'state' => JobPostStateEnum::class,
-        'job_type' => JobTypeEnum::class
+        'job_type' => JobTypeEnum::class,
+        'requirements' => 'array',
     ];
 
     public function recruiter(): BelongsTo

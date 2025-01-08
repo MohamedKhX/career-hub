@@ -17,6 +17,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Recruiter\Widgets\RecruiterStatsOverview;
+use App\Filament\Recruiter\Widgets\RecruiterApplicationsChart;
+use App\Filament\Recruiter\Widgets\TopJobPostsChart;
+use App\Filament\Recruiter\Widgets\ApplicationsByStateChart;
 
 class RecruiterPanelProvider extends PanelProvider
 {
@@ -45,8 +49,10 @@ class RecruiterPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Recruiter/Widgets'), for: 'App\\Filament\\Recruiter\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                RecruiterStatsOverview::class,
+                RecruiterApplicationsChart::class,
+                TopJobPostsChart::class,
+                ApplicationsByStateChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,
