@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title', 150);
             $table->text('description');
             $table->text('requirements');
-            $table->decimal('salary')->nullable();
+            $table->decimal('from_salary')->nullable();
+            $table->decimal('to_salary')->nullable();
             $table->enum('job_type', JobTypeEnum::values());
             $table->enum('state', JobPostStateEnum::values())
                 ->default(JobPostStateEnum::Open);

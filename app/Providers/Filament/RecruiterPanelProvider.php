@@ -68,6 +68,7 @@ class RecruiterPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->font('Rubik');
+            ->font('Rubik')
+            ->databaseNotifications();
     }
 }

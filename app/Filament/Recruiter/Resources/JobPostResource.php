@@ -12,14 +12,15 @@ use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class JobPostResource extends Resource
 {
@@ -27,7 +28,7 @@ class JobPostResource extends Resource
 
     protected static ?string $model = JobPost::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'solar-pen-new-round-bold-duotone';
 
     public static function form(Form $form): Form
     {
@@ -47,8 +48,19 @@ class JobPostResource extends Resource
                             ->required()
                             ->columnSpan('full'),
 
-                        TextInput::make('salary')
-                            ->label('Salary')
+                        SpatieMediaLibraryFileUpload::make('thumbnail')
+                            ->label('Thumbnail')
+                            ->translateLabel()
+                            ->collection('thumbnail')
+                            ->columnSpan('full'),
+
+                        TextInput::make('from_salary')
+                            ->label('From Salary')
+                            ->translateLabel()
+                            ->suffixIcon('solar-wallet-money-bold-duotone') ,
+
+                        TextInput::make('to_salary')
+                            ->label('To Salary')
                             ->translateLabel()
                             ->suffixIcon('solar-wallet-money-bold-duotone') ,
 
@@ -57,7 +69,8 @@ class JobPostResource extends Resource
                             ->translateLabel()
                             ->options(JobTypeEnum::getTranslations())
                             ->required()
-                            ->suffixIcon('solar-palette-round-line-duotone'),
+                            ->suffixIcon('solar-palette-round-line-duotone')
+                            ->columnSpan('full'),
 
                         Repeater::make('requirements')
                             ->label('Requirements')
@@ -83,7 +96,6 @@ class JobPostResource extends Resource
                             ->label('Industry')
                             ->translateLabel()
                             ->relationship('industry', 'name')
-                            ->options(JobTypeEnum::getTranslations())
                             ->required()
                             ->searchable()
                             ->suffixIcon('solar-layers-minimalistic-bold-duotone'),
@@ -93,7 +105,6 @@ class JobPostResource extends Resource
                             ->translateLabel()
                             ->relationship('city', 'name')
                             ->searchable()
-                            ->options(JobTypeEnum::getTranslations())
                             ->required()
                             ->suffixIcon('solar-city-bold-duotone')
                             ->columnSpan('full'),
@@ -111,18 +122,30 @@ class JobPostResource extends Resource
                     ->translateLabel()
                     ->description(fn($record) => str($record->description)->words(30)),
 
-                TextColumn::make('salary')
-                    ->label('Salary')
-                    ->translateLabel(),
-
-                TextColumn::make('job_type')
-                    ->label('Salary')
+                TextColumn::make('state')
+                    ->label('State')
                     ->translateLabel()
+                    ->formatStateUsing(fn($state) => $state->translate())
+                    ->color(fn ($state): string => match ($state) {
+                        JobPostStateEnum::Open => 'success',
+                        JobPostStateEnum::Closed => 'danger',
+                    })
                     ->badge(),
 
-                TextColumn::make('state')
-                    ->label('Salary')
+                TextColumn::make('from_salary')
+                    ->label('From Salary')
                     ->translateLabel()
+                    ->suffix(' د.ل'),
+
+                TextColumn::make('to_salary')
+                    ->label('To Salary')
+                    ->translateLabel()
+                    ->suffix(' د.ل'),
+
+                TextColumn::make('job_type')
+                    ->label('Job Type')
+                    ->translateLabel()
+                    ->formatStateUsing(fn($state) => $state->translate())
                     ->badge(),
 
                 TextColumn::make('category.name')
@@ -145,7 +168,7 @@ class JobPostResource extends Resource
                 Tables\Actions\Action::make('change_state')
                     ->label('Change State')
                     ->translateLabel()
-                    ->color('primary')
+                    ->color('teal')
                     ->icon('solar-satellite-bold-duotone')
                     ->form([
                         Forms\Components\Select::make('state')

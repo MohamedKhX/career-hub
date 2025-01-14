@@ -46,8 +46,9 @@ class JobPostSeeder extends Seeder
             JobPost::create([
                 'title' => $title,
                 'description' => 'وصف تفصيلي للوظيفة وشروطها ومتطلباتها',
-                'requirements' => json_encode($requirements),
-                'salary' => rand(2000, 10000),
+                'requirements' => $requirements,
+                'from_salary' =>  rand(2000, 5000),
+                'to_salary'   =>  rand(5000, 10000),
                 'job_type' => $jobTypes[array_rand($jobTypes)]->value,
                 'state' => JobPostStateEnum::Open,
                 'recruiter_id' => $recruiters->random()->id,
