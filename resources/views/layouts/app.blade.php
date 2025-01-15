@@ -1,132 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="msapplication-TileColor" content="#0E0E0E">
-    <meta name="template-color" content="#0E0E0E">
-    <link rel="manifest" href="manifest.json" crossorigin>
-    <meta name="msapplication-config" content="browserconfig.xml">
-    <meta name="description" content="Index page">
-    <meta name="keywords" content="index, page">
-    <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
-    <link href="assets/css/style.css?version=4.1" rel="stylesheet">
-    @filamentStyles
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - بوابتك لمستقبل مهني مشرق</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-red': '#FF3366',
+                        'brand-dark': '#1A1A2E',
+                    }
+                }
+            },
+            darkMode: 'class'
+
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Rubik', sans-serif !important;
+        * {
+            font-family: 'Tajawal', serif !important;
         }
     </style>
-    <title>Career hub</title>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float { animation: float 3s ease-in-out infinite; }
+    </style>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+    @vite(['resources/css/app.css', 'resources/css/filament/admin/theme.css'])
+    @filamentStyles
 </head>
-
-<body>
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="text-center"><img src="assets/imgs/template/loading.gif" alt="jobBox"></div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="ModalApplyJobForm" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content apply-job-form">
-            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-body pl-30 pr-30 pt-50">
-                <div class="text-center">
-                    <p class="font-sm text-brand-2">Job Application </p>
-                    <h2 class="mt-10 mb-5 text-brand-1 text-capitalize">Start your career today</h2>
-                    <p class="font-sm text-muted mb-30">Please fill in your information and send it to the employer. </p>
-                </div>
-                <form class="login-register text-start mt-20 pb-30" action="#">
-                    <div class="form-group">
-                        <label class="form-label" for="input-1">Full Name *</label>
-                        <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Steven Job">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="input-2">Email *</label>
-                        <input class="form-control" id="input-2" type="email" required="" name="emailaddress" placeholder="stevenjob@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="number">Contact Number *</label>
-                        <input class="form-control" id="number" type="text" required="" name="phone" placeholder="(+01) 234 567 89">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="des">Description</label>
-                        <input class="form-control" id="des" type="text" required="" name="Description" placeholder="Your description...">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="file">Upload Resume</label>
-                        <input class="form-control" id="file" name="resume" type="file">
-                    </div>
-                    <div class="login_footer form-group d-flex justify-content-between">
-                        <label class="cb-container">
-                            <input type="checkbox"><span class="text-small">Agree our terms and policy</span><span class="checkmark"></span>
-                        </label><a class="text-muted" href="page-contact.html">Lean more</a>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-default hover-up w-100" type="submit" name="login">Apply Job</button>
-                    </div>
-                    <div class="text-muted text-center">Do you need support? <a href="page-contact.html">Contact Us</a></div>
-                </form>
+<body class="font-sans bg-gray-50 text-brand-dark">
+<header class="bg-white shadow-md">
+    <nav class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <svg class="w-10 h-10 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span class="text-2xl font-bold">CareerHub</span>
+            </div>
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+                <a href="{{ route('home') }}" class="text-lg hover:text-brand-red transition-colors">الرئيسية</a>
+                <a href="{{ route('home') }}#jobs" class="text-lg hover:text-brand-red transition-colors">الوظائف</a>
+                <a href="{{ route('home') }}#companies" class="text-lg hover:text-brand-red transition-colors">الشركات</a>
+            </div>
+            <div class="hidden md:block">
+                <button class="bg-brand-red text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors text-lg font-medium">تسجيل دخول</button>
+                <button class=" px-6 py-2 rounded-full transition-colors text-lg font-medium">إنشاء حساب</button>
+            </div>
+            <div class="md:hidden">
+                <button class="text-brand-dark hover:text-brand-red transition-colors">
+                    <i data-feather="menu"></i>
+                </button>
             </div>
         </div>
-    </div>
-</div>
-<header class="header sticky-bar">
-    <div class="container">
-        <div class="main-header">
-            <div class="header-left">
-                <h3 class="header-logo">
-                    CareerHub
-                </h3>
-            </div>
-            <div class="header-nav">
-                <nav class="nav-main-menu">
-                    <ul class="main-menu">
-                        <li class="" style="font-size: 17px !important;">
-                            <a href="companies-grid.html">الأقسام</a>
-                        </li>
-                        <li class="">
-                            <a href="companies-grid.html">الشركات</a>
-                        </li>
-                        <li class="">
-                            <a href="jobs-grid.html">ابحث عن وظيفة</a>
-                        </li>
-                        <li class="">
-                            <a class="active" href="index.html">الرئيسية</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
-            </div>
-            <div class="header-right">
-                <div class="block-signin"><a class="text-link-bd-btom hover-up" href="page-register.html">إنشاء حساب</a><a class="btn btn-default btn-shadow ml-40 hover-up" href="page-signin.html">تسجيل الدخول</a></div>
-            </div>
-        </div>
-    </div>
+    </nav>
 </header>
-<main class="main">
 
-    <div class="bg-homepage4"></div>
-
+<main>
     {{ $slot }}
 </main>
-<script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
-<script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/waypoints.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/wow.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/magnific-popup.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/select2.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/isotope.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/scrollup.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/swiper-bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/main.js?v') }}=4.1"></script>
+
+<footer class="bg-brand-dark text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div>
+                <h5 class="text-xl font-semibold mb-4">حول CareerHub</h5>
+                <p class="text-gray-400">نربط المهنيين الموهوبين بفرص عمل مذهلة في جميع أنحاء العالم.</p>
+            </div>
+            <div>
+                <h5 class="text-xl font-semibold mb-4">روابط سريعة</h5>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-brand-red transition-colors">البحث عن وظائف</a></li>
+                    <li><a href="#" class="hover:text-brand-red transition-colors">نشر وظيفة</a></li>
+                    <li><a href="#" class="hover:text-brand-red transition-colors">إنشاء السيرة الذاتية</a></li>
+                    <li><a href="#" class="hover:text-brand-red transition-colors">نصائح مهنية</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-xl font-semibold mb-4">الدعم</h5>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-brand-red transition-colors">مركز المساعدة</a></li>
+                    <li><a href="#" class="hover:text-brand-red transition-colors">الأسئلة الشائعة</a></li>
+                    <li><a href="#" class="hover:text-brand-red transition-colors">اتصل بنا</a></li>
+                    <li><a href="#" class="hover:text-brand-red transition-colors">سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-xl font-semibold mb-4">تواصل معنا</h5>
+                <div class="flex space-x-4 space-x-reverse">
+                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
+                        <i data-feather="facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
+                        <i data-feather="instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>© 2025 CareerHub. جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+</footer>
+@filamentScripts
 </body>
 </html>
