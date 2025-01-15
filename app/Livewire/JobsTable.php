@@ -8,6 +8,7 @@ use App\Models\Industry;
 use App\Models\JobPost;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -24,6 +25,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\Builder;
 
 class JobsTable extends Component implements HasForms, HasTable
 {
@@ -96,38 +98,132 @@ class JobsTable extends Component implements HasForms, HasTable
                     ->icon('solar-city-bold-duotone'),
             ])
             ->filters([
-                Filter::make('Salary Range')
+                Filter::make('salary_range')
                     ->form([
-                        TextInput::make('from_salary')
-                            ->label('From Salary')
-                            ->numeric()
-                            ->placeholder('أقل مرتب'),
-                        TextInput::make('to_salary')
-                            ->label('To Salary')
-                            ->numeric()
-                            ->placeholder('أعلى مرتب'),
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('from_salary')
+                                    ->label(__('From Salary'))
+                                    ->numeric()
+                                    ->placeholder('0')
+                                    ->suffixIcon('heroicon-m-currency-dollar'),
+                                TextInput::make('to_salary')
+                                    ->label(__('To Salary'))
+                                    ->numeric()
+                                    ->placeholder('100000')
+                                    ->suffixIcon('heroicon-m-currency-dollar'),
+                            ])
                     ])
-                    ->query(function ($query, $data) {
+                    ->query(function (Builder $query, array $data): Builder {
                         return $query
-                            ->when($data['from_salary'], fn ($q, $from) => $q->where('from_salary', '>=', $from))
-                            ->when($data['to_salary'], fn ($q, $to) => $q->where('to_salary', '<=', $to));
+                            ->when(
+                                $data['from_salary'],
+                                fn (Builder $query, $salary): Builder => $query->where('from_salary', '>=', $salary),
+                            )
+                            ->when(
+                                $data['to_salary'],
+                                fn (Builder $query, $salary): Builder => $query->where('to_salary', '<=', $salary),
+                            );
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        $indicators = [];
+                        if ($data['from_salary'] ?? null) {
+                            $indicators[] = __('Minimum Salary') . ': ' . number_format($data['from_salary']) . ' ' . __('LYD');
+                        }
+                        if ($data['to_salary'] ?? null) {
+                            $indicators[] = __('Maximum Salary') . ': ' . number_format($data['to_salary']) . ' ' . __('LYD');
+                        }
+                        return $indicators;
                     }),
 
                 SelectFilter::make('job_type')
-                    ->label('Job Type')
-                    ->options(JobTypeEnum::getTranslations())
-                    ->placeholder('All Job Types'),
-
-                SelectFilter::make('industry.name')
-                    ->label('Industry')
-                    ->options(Industry::pluck('name', 'id'))
-                    ->placeholder('All Industries'),
+                    ->label(__('Job Type'))
+                    ->options(JobTypeEnum::class)
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
 
                 SelectFilter::make('city')
-                    ->label('City')
-                    ->options(City::pluck('name', 'id'))
-                    ->placeholder('All Cities'),
+                    ->label(__('City'))
+                    ->relationship('city', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->multiple(),
+
+                SelectFilter::make('industry')
+                    ->label(__('Industry'))
+                    ->relationship('industry', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->multiple(),
+
+                SelectFilter::make('category')
+                    ->label(__('Category'))
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->multiple(),
+
+                Filter::make('created_at')
+                    ->form([
+                        Grid::make(2)
+                            ->schema([
+                                DatePicker::make('posted_from')
+                                    ->label(__('Posted From'))
+                                    ->placeholder(fn ($state): string => now()->subYear()->format('M d, Y')),
+                                DatePicker::make('posted_until')
+                                    ->label(__('Posted Until'))
+                                    ->placeholder(fn ($state): string => now()->format('M d, Y')),
+                            ]),
+
+                    ])
+                    ->columnSpan(1)
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['posted_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['posted_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        $indicators = [];
+                        if ($data['posted_from'] ?? null) {
+                            $indicators[] = __('Posted from') . ': ' . $data['posted_from'];
+                        }
+                        if ($data['posted_until'] ?? null) {
+                            $indicators[] = __('Posted until') . ': ' . $data['posted_until'];
+                        }
+                        return $indicators;
+                    }),
+
+              /*  Filter::make('company_name')
+                    ->form([
+                        TextInput::make('company_name')
+                            ->label(__('Company Name'))
+                            ->placeholder(__('Search by company name'))
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['company_name'],
+                            fn (Builder $query, $name): Builder => $query
+                                ->whereHas('recruiter', fn ($q) =>
+                                    $q->where('company_name', 'like', "%{$name}%")
+                                )
+                        );
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        $indicators = [];
+                        if ($data['company_name'] ?? null) {
+                            $indicators[] = __('Company') . ': ' . $data['company_name'];
+                        }
+                        return $indicators;
+                    }),*/
             ])
+            ->filtersFormColumns(3)
             ->filtersLayout(FiltersLayout::AboveContent)
             ->actions([
                 Action::make('view')

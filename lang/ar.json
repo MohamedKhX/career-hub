@@ -61,6 +61,22 @@
     "Monthly Applications Received": "الطلبات الشهرية المستلمة",
     "Most Popular Job Posts": "أكثر الوظائف شعبية",
     "Applications by Status": "الطلبات حسب الحالة",
-    "Applications": "الطلبات"
+    "Applications": "الطلبات",
+    "Filters": "تصفية",
+    "Reset Filters": "إعادة تعيين التصفية",
+    "Minimum Salary": "الحد الأدنى للراتب",
+    "Maximum Salary": "الحد الأقصى للراتب",
+    "LYD": "د.ل",
+    "Posted From": "تاريخ النشر من",
+    "Posted Until": "تاريخ النشر إلى",
+    "Posted from": "منشور من",
+    "Posted until": "منشور حتى",
+    "Search by company name": "البحث باسم الشركة",
+    "Select options": "اختر خيارات",
+    "No options available": "لا توجد خيارات متاحة",
+    "Search": "بحث",
+    "full time": "دوام كامل",
+    "part time": "دوام جزئي",
+    "freelancer": "عمل حر"
 }
 
