@@ -44,7 +44,7 @@ class JobsTable extends Component implements HasForms, HasTable
                     ->label('Title')
                     ->translateLabel()
                     ->searchable()
-                    ->description(fn($record) => $record->description),
+                    ->description(fn($record) => $record->short_description),
 
                 TextColumn::make('from_salary')
                     ->label('From Salary')
@@ -199,29 +199,6 @@ class JobsTable extends Component implements HasForms, HasTable
                         }
                         return $indicators;
                     }),
-
-              /*  Filter::make('company_name')
-                    ->form([
-                        TextInput::make('company_name')
-                            ->label(__('Company Name'))
-                            ->placeholder(__('Search by company name'))
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query->when(
-                            $data['company_name'],
-                            fn (Builder $query, $name): Builder => $query
-                                ->whereHas('recruiter', fn ($q) =>
-                                    $q->where('company_name', 'like', "%{$name}%")
-                                )
-                        );
-                    })
-                    ->indicateUsing(function (array $data): array {
-                        $indicators = [];
-                        if ($data['company_name'] ?? null) {
-                            $indicators[] = __('Company') . ': ' . $data['company_name'];
-                        }
-                        return $indicators;
-                    }),*/
             ])
             ->filtersFormColumns(3)
             ->filtersLayout(FiltersLayout::AboveContent)
@@ -231,9 +208,9 @@ class JobsTable extends Component implements HasForms, HasTable
                     ->translateLabel()
                     ->color(Color::Rose)
                     ->icon('solar-eye-bold-duotone')
-                    ->url(route('job-details'), shouldOpenInNewTab: true),
+                    ->url(fn($record) => route('job-details', ['jobPost' => $record->id]), shouldOpenInNewTab: true),
             ])
-            ->recordUrl(fn($record) => route('job-details'), shouldOpenInNewTab: true);
+            ->recordUrl(fn($record) => route('job-details', ['jobPost' => $record->id]), shouldOpenInNewTab: true);
     }
 
     public function render()

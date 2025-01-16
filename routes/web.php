@@ -1,8 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+use App\Models\JobPost;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
-Route::view('job-details', 'job-details')->name('job-details');
-Route::view('/login', 'auth.login')->name('login');
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
+
+Route::get('job-details/{jobPost:id}', function (JobPost $jobPost) {
+    return view('job-details', compact('jobPost'));
+})->name('job-details');
+
+Route::view('/login', 'auth.login')
+    ->name('login');
+

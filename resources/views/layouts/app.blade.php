@@ -74,55 +74,6 @@
 <main>
     {{ $slot }}
 </main>
-
-<footer class="bg-brand-dark text-white py-12">
-    <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-4 gap-8">
-            <div>
-                <h5 class="text-xl font-semibold mb-4">حول CareerHub</h5>
-                <p class="text-gray-400">نربط المهنيين الموهوبين بفرص عمل مذهلة في جميع أنحاء العالم.</p>
-            </div>
-            <div>
-                <h5 class="text-xl font-semibold mb-4">روابط سريعة</h5>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-brand-red transition-colors">البحث عن وظائف</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition-colors">نشر وظيفة</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition-colors">إنشاء السيرة الذاتية</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition-colors">نصائح مهنية</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-xl font-semibold mb-4">الدعم</h5>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-brand-red transition-colors">مركز المساعدة</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition-colors">الأسئلة الشائعة</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition-colors">اتصل بنا</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition-colors">سياسة الخصوصية</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-xl font-semibold mb-4">تواصل معنا</h5>
-                <div class="flex space-x-4 space-x-reverse">
-                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
-                        <i data-feather="facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
-                        <i data-feather="twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
-                        <i data-feather="linkedin"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-brand-red transition-colors">
-                        <i data-feather="instagram"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2025 CareerHub. جميع الحقوق محفوظة.</p>
-        </div>
-    </div>
-</footer>
 @filamentScripts
 </body>
 </html>

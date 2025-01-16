@@ -60,20 +60,28 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <h4 class="text-4xl font-bold mb-2">+10 آلاف</h4>
+                    <h4 class="text-4xl font-bold mb-2">
+                        {{ $jobPostsCount }} +
+                    </h4>
                     <p class="text-xl">إعلان وظيفي</p>
                 </div>
                 <div>
-                    <h4 class="text-4xl font-bold mb-2">+5 آلاف</h4>
+                    <h4 class="text-4xl font-bold mb-2">
+                        {{ $companiesCount }} +
+                    </h4>
                     <p class="text-xl">شركة</p>
                 </div>
                 <div>
-                    <h4 class="text-4xl font-bold mb-2">+15 مليون</h4>
+                    <h4 class="text-4xl font-bold mb-2">
+                        {{ $jobApplicationsCount }} +
+                    </h4>
                     <p class="text-xl">مرشح</p>
                 </div>
                 <div>
-                    <h4 class="text-4xl font-bold mb-2">+1 مليون</h4>
-                    <p class="text-xl">توظيف</p>
+                    <h4 class="text-4xl font-bold mb-2">
+                        {{ $userCount }} +
+                    </h4>
+                    <p class="text-xl">مستخدم</p>
                 </div>
             </div>
         </div>
@@ -84,22 +92,12 @@
         <div class="container mx-auto px-6">
             <h3 class="text-3xl font-bold mb-8">أفضل الشركات التي توظف</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
-                    <img src="https://logo.clearbit.com/google.com" alt="جوجل" class="w-16 h-16 mx-auto mb-4">
-                    <h4 class="font-semibold">جوجل</h4>
-                </div>
-                <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
-                    <img src="https://logo.clearbit.com/apple.com" alt="آبل" class="w-16 h-16 mx-auto mb-4">
-                    <h4 class="font-semibold">آبل</h4>
-                </div>
-                <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
-                    <img src="https://logo.clearbit.com/amazon.com" alt="أمازون" class="w-16 h-16 mx-auto mb-4">
-                    <h4 class="font-semibold">أمازون</h4>
-                </div>
-                <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
-                    <img src="https://logo.clearbit.com/microsoft.com" alt="مايكروسوفت" class="w-16 h-16 mx-auto mb-4">
-                    <h4 class="font-semibold">مايكروسوفت</h4>
-                </div>
+                @foreach($companies as $company)
+                    <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+                        <img src="{{ $company->logo }}" alt="" class="w-16 h-16 mx-auto mb-4">
+                        <h4 class="font-semibold">{{ $company->company_name }}</h4>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

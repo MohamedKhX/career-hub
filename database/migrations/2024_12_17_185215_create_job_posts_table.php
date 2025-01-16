@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('job_posts', function (Blueprint $table) {
             $table->id();
             $table->string('title', 150);
+            $table->string('short_description', 255);
             $table->text('description');
-            $table->text('requirements');
             $table->decimal('from_salary')->nullable();
             $table->decimal('to_salary')->nullable();
             $table->enum('job_type', JobTypeEnum::values());

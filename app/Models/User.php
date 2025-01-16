@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserTypeEnum;
+use Filament\Forms\Components\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -52,5 +54,15 @@ class User extends Authenticatable
     public function recruiter(): BelongsTo
     {
         return $this->belongsTo(Recruiter::class);
+    }
+
+    public function applications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
+    public function appliedTo(JobPost $jobPost): bool
+    {
+        return $this->applications()->where('job_post_id', $jobPost->id)->exists();
     }
 }

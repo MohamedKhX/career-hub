@@ -13,6 +13,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -38,6 +39,13 @@ class JobPostResource extends Resource
                     ->schema([
                         TextInput::make('title')
                             ->label('Title')
+                            ->translateLabel()
+                            ->required()
+                            ->columnSpan('full'),
+
+
+                        Textarea::make('short_description')
+                            ->label('Short Description')
                             ->translateLabel()
                             ->required()
                             ->columnSpan('full'),
@@ -72,17 +80,6 @@ class JobPostResource extends Resource
                             ->suffixIcon('solar-palette-round-line-duotone')
                             ->columnSpan('full'),
 
-                        Repeater::make('requirements')
-                            ->label('Requirements')
-                            ->translateLabel()
-                            ->simple(
-                                TextInput::make('requirement')
-                                    ->label('Requirement')
-                                    ->translateLabel()
-                                    ->required(),
-                            )
-                            ->minItems(1)
-                            ->columnSpan('full'),
 
                         Select::make('category_id')
                             ->label('Category')

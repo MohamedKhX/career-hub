@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -39,10 +40,47 @@ class JobApplicationResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Name')
+                    ->translateLabel(),
+
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->translateLabel()
+                    ->searchable(),
+
+                TextColumn::make('phone')
+                    ->label('Phone')
+                    ->translateLabel()
+                    ->searchable(),
+
+                TextColumn::make('date_of_birth')
+                    ->label('Date Of Birth')
+                    ->translateLabel()
+                    ->date(),
+
+                TextColumn::make('place_of_residence')
+                    ->label('Place Of Residence')
+                    ->translateLabel()
+                    ->searchable(),
+
+                TextColumn::make('years_of_experience')
+                    ->label('Years Of Experience')
+                    ->translateLabel()
+                    ->badge()
+                    ->suffix(' سنة')
+                    ->searchable(),
+
+                TextColumn::make('expected_salary')
+                    ->label('Expected Salary')
+                    ->translateLabel()
+                    ->badge()
+                    ->suffix(' دينار')
+                    ->searchable(),
+
             ])
             ->filters([
-                //
+
             ])
             ->actions([]);
     }
