@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Grid as InfoGrid;
 use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\Section as InfoSection;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -111,21 +112,32 @@ class JobApplicationResource extends Resource
                             ->icon('solar-folder-with-files-bold-duotone')
                             ->columnSpan(3)
                             ->schema([
-                                TextEntry::make('attachments')
-                                    ->label(__('Attachments'))
-                                    ->listWithLineBreaks()
-                                    ->bulleted()
-                                    ->extraAttributes(['class' => 'prose dark:prose-invert'])
-                                    ->formatStateUsing(function ($record) {
-                                        return $record->getMedia('attachments')->map(function ($media) {
-                                            return view('components.file-link', [
-                                                'url' => $media->getUrl(),
-                                                'fileName' => $media->file_name,
-                                                'fileSize' => $media->human_readable_size,
-                                            ])->render();
-                                        })->toArray();
-                                    })
-                                    ->html(),
+                                RepeatableEntry::make('attachments')
+                                    ->label('Attachments')
+                                    ->translateLabel()
+                                    ->schema([
+                                        TextEntry::make('file_name')
+                                            ->label('File Name')
+                                            ->translateLabel()
+                                            ->limit(30),
+
+                                        TextEntry::make('size')
+                                            ->label('Size')
+                                            ->translateLabel()
+                                            ->formatStateUsing(fn ($state) => round($state / 1048576, 2)),
+
+                                        TextEntry::make('mime_type')
+                                            ->label('Type')
+                                            ->translateLabel(),
+
+                                        TextEntry::make('')
+                                            ->label('Link')
+                                            ->translateLabel()
+                                            ->formatStateUsing(fn ($state) => __('Click To Download'))
+                                            ->url(fn($record) => $record->getUrl(), true),
+                                    ])
+                                    ->columns(2)
+                                    ->columnSpan(4),
                             ]),
                     ]),
             ]);
@@ -213,5 +225,10 @@ class JobApplicationResource extends Resource
         return [
             'index' => Pages\ListJobApplications::route('/'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }

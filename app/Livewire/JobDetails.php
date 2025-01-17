@@ -2,12 +2,15 @@
 
 namespace App\Livewire;
 
+use AllowDynamicProperties;
+use App\Models\JobApplication;
 use App\Models\JobPost;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -17,14 +20,19 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\TranslatableContentDriver;
 use Filament\Support\Enums\ActionSize;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
+#[AllowDynamicProperties]
 class JobDetails extends Component implements HasForms, HasActions
 {
     use InteractsWithActions;
     use InteractsWithForms;
 
     public JobPost $record;
+    public $application;
+    public $attachments;
 
     public function mount($record): void
     {
@@ -63,6 +71,7 @@ class JobDetails extends Component implements HasForms, HasActions
                 $jobApplication = $user->applications()->where('job_post_id', $this->record->id)->first();
                 return $jobApplication->attributesToArray();
             })
+            ->model(JobApplication::class)
             ->form([
                 Fieldset::make()
                     ->schema([
@@ -124,11 +133,13 @@ class JobDetails extends Component implements HasForms, HasActions
                             ->required()
                             ->columnSpan('full'),
 
-                        SpatieMediaLibraryFileUpload::make('attachments')
+                        FileUpload::make('attachments')
                             ->label('Attachments')
                             ->translateLabel()
-                            ->collection('attachments')
                             ->multiple()
+                            ->disk('public') // Specify the disk to store files
+                            ->directory('attachments') // Optional: Specify a directory
+                            ->preserveFilenames() // Optional: Keep original filenames
                             ->columnSpan('full'),
 
                         Hidden::make('user_id')
@@ -154,7 +165,23 @@ class JobDetails extends Component implements HasForms, HasActions
                 return false;
             })
             ->action(function ($data) {
-                $this->record->applications()->create($data);
+                $data = collect($data);
+
+                // Create the job application record without attachments
+                $application = $this->record->applications()->create($data->except('attachments')->toArray());
+
+                // Check if attachments exist and process them
+                if (isset($data['attachments']) && is_array($data['attachments'])) {
+                    foreach ($data['attachments'] as $filePath) {
+                        // Get the absolute path to the file
+                        $absolutePath = Storage::disk('public')->path($filePath);
+
+                        // Ensure the file exists before adding to media collection
+                        if (file_exists($absolutePath)) {
+                            $application->addMedia($absolutePath)->toMediaCollection('attachments');
+                        }
+                    }
+                }
             });
     }
 

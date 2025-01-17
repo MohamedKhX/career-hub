@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
+            'type' => 'admin',
         ]);
         $this->call([
             CitySeeder::class,

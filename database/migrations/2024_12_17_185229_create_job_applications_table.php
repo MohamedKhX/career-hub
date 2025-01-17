@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
             $table->text('cover_letter');
-            /*$table->enum('state', JobApplicationStateEnum::values())
-                ->default(JobApplicationStateEnum::Pending->value);*/
+            $table->enum('state', JobApplicationStateEnum::values())
+                ->default(JobApplicationStateEnum::Pending->value);
 
             $table->string('first_name', 100);
             $table->string('middle_name', 100);

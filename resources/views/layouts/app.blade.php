@@ -59,9 +59,27 @@
                 <a href="{{ route('home') }}#companies" class="text-lg hover:text-brand-red transition-colors">الشركات</a>
             </div>
             <div class="hidden md:block">
-                <button class="bg-brand-red text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors text-lg font-medium">تسجيل دخول</button>
-                <button class=" px-6 py-2 rounded-full transition-colors text-lg font-medium">إنشاء حساب</button>
-            </div>
+                @auth
+                    <div class="flex">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-brand-red text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors text-lg font-medium">تسجيل خروج</button>
+                        </form>
+
+                        @if(auth()->user()->type == \App\Enums\UserTypeEnum::Admin)
+                            <a href="/admin" class="cursor-pointer px-6 py-2 rounded-full transition-colors text-lg font-medium">ذهاب للوحة التحكم</a>
+                        @endif
+
+                        @if(auth()->user()->type == \App\Enums\UserTypeEnum::Recruiter)
+                            <a href="/recruiter" class="cursor-pointer px-6 py-2 rounded-full transition-colors text-lg font-medium">ذهاب للوحة التحكم</a>
+                        @endif
+                    </div>
+
+                @else
+                    <a href="{{ route('login') }}" class="bg-brand-red cursor-pointer text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors text-lg font-medium">تسجيل دخول</a>
+                    <button class=" px-6 py-2 rounded-full transition-colors text-lg font-medium">إنشاء حساب</button>
+                @endauth
+             </div>
             <div class="md:hidden">
                 <button class="text-brand-dark hover:text-brand-red transition-colors">
                     <i data-feather="menu"></i>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
@@ -19,11 +20,9 @@ class JobApplication extends Model implements HasMedia
         'years_of_experience' => 'integer',
     ];
 
-    public function registerMediaCollections(): void
+    public function attachments(): Attribute
     {
-        $this->addMediaCollection('attachments')
-            ->acceptsMimeTypes(['application/pdf', 'image/*', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-            ->useDisk('public');
+        return Attribute::get(fn() => $this->getMedia('attachments'));
     }
 
     public function jobPost(): BelongsTo

@@ -13,6 +13,11 @@ class JobApplicationSeeder extends Seeder
     public function run(): void
     {
         $jobPosts = JobPost::all();
+
+        $users = User::factory(10)->create([
+            'type' => 'job seeker'
+        ]);
+
         $users = User::where('type', 'job seeker')->get();
 
         $libyanNames = [
@@ -50,16 +55,14 @@ class JobApplicationSeeder extends Seeder
         ];
 
         foreach($jobPosts as $jobPost) {
-            $numberOfApplications = rand(3, 8);
-
-            for($i = 0; $i < $numberOfApplications; $i++) {
+            foreach ($users as $user) {
                 $firstName = $libyanNames['first'][array_rand($libyanNames['first'])];
                 $middleName = $libyanNames['middle'][array_rand($libyanNames['middle'])];
                 $lastName = $libyanNames['last'][array_rand($libyanNames['last'])];
 
                 $application = JobApplication::create([
                     'job_post_id' => $jobPost->id,
-                    'user_id' => $users->random()->id,
+                    'user_id' => $user->id,
                     'first_name' => $firstName,
                     'middle_name' => $middleName,
                     'last_name' => $lastName,
