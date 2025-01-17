@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             RecruiterSeeder::class,
             JobPostSeeder::class,
+            JobApplicationSeeder::class,
         ]);
     }
 }
