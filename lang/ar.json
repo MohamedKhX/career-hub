@@ -21,7 +21,7 @@
     "Middle Name": "الاسم الأب",
     "Last Name": "اللقب",
     "To Salary": "إلى راتب",
-    "Job Applications": "طلبات الوظائف",
+    "Job Applications": "طلبات التوظيف",
     "Job Application": "طلب وظيفة",
     "Apply Job": "تقديم طلب للوظيفة",
     "Recruiter": "مسؤول التوظيف",
@@ -91,6 +91,19 @@
     "Search": "بحث",
     "full time": "دوام كامل",
     "part time": "دوام جزئي",
-    "freelancer": "عمل حر"
+    "freelancer": "عمل حر",
+    "Job Applications": "طلبات التوظيف",
+    "Personal Information": "المعلومات الشخصية",
+    "Job Details": "تفاصيل الوظيفة",
+    "Application Details": "تفاصيل الطلب",
+    "Job Title": "المسمى الوظيفي",
+    "Applicant": "المتقدم",
+    "Applied At": "تاريخ التقديم",
+    "Applied From": "تاريخ التقديم من",
+    "Applied Until": "تاريخ التقديم إلى",
+    "View Details": "عرض التفاصيل",
+    "Application Details for": "تفاصيل الطلب للوظيفة",
+    "years": "سنوات",
+    "State": "الحالة"
 }
 

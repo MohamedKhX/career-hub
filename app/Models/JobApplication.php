@@ -2,17 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class JobApplication extends Model
+class JobApplication extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\JobApplicationFactory> */
-    use HasFactory;
+    use InteractsWithMedia;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'date_of_birth' => 'date',
+        'expected_salary' => 'decimal:2',
+        'years_of_experience' => 'integer',
+    ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('attachments')
+            ->acceptsMimeTypes(['application/pdf', 'image/*', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+            ->useDisk('public');
+    }
 
     public function jobPost(): BelongsTo
     {
@@ -22,10 +34,5 @@ class JobApplication extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function name(): Attribute
-    {
-        return Attribute::get(fn($value) => "{$this->first_name} {$this->middle_name} {$this->last_name}");
     }
 }
