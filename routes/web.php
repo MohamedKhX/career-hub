@@ -15,6 +15,4 @@ Route::get('job-details/{jobPost:id}', function (JobPost $jobPost) {
     return view('job-details', compact('jobPost'));
 })->name('job-details');
 
-Route::view('/login', 'auth.login')
-    ->name('login');
 require __DIR__.'/auth.php';

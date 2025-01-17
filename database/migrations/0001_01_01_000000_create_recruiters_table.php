@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('recruiters', function (Blueprint $table) {
             $table->id();
             $table->string('company_name');
-            $table->string('company_website');
-            $table->text('description');
+            $table->string('company_website')->nullable();
+            $table->text('description')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();

@@ -56,11 +56,11 @@ class JobPostResource extends Resource
                             ->required()
                             ->columnSpan('full'),
 
-                        SpatieMediaLibraryFileUpload::make('thumbnail')
+                        /*SpatieMediaLibraryFileUpload::make('thumbnail')
                             ->label('Thumbnail')
                             ->translateLabel()
                             ->collection('thumbnail')
-                            ->columnSpan('full'),
+                            ->columnSpan('full'),*/
 
                         TextInput::make('from_salary')
                             ->label('From Salary')
@@ -117,7 +117,7 @@ class JobPostResource extends Resource
                 TextColumn::make('title')
                     ->label('Title')
                     ->translateLabel()
-                    ->description(fn($record) => str($record->description)->words(30)),
+                    ->description(fn($record) => str($record->short_description)->words(30)),
 
                 TextColumn::make('state')
                     ->label('State')
