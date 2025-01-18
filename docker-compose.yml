@@ -24,7 +24,7 @@ services:
             - ASSET_URL=https://career-hub.laraplay.fun
             - VITE_APP_URL=https://career-hub.laraplay.fun
 
-            - APP_LOCALE=en
+            - APP_LOCALE=ar
             - APP_FALLBACK_LOCALE=en
             - APP_FAKER_LOCALE=en_US
 

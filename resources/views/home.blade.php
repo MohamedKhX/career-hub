@@ -6,7 +6,7 @@
                     <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">اكتشف مستقبلك المهني مع CareerHub</h1>
                     <p class="text-xl lg:text-2xl mb-8 opacity-90">نحن نربط المواهب بالفرص. ابدأ رحلتك المهنية اليوم واستكشف آلاف الوظائف المميزة من أفضل الشركات في المنطقة.</p>
                     <div class="flex flex-col sm:flex-row justify-start space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
-                        <button class="bg-white text-brand-red px-8 py-3 rounded-full hover:bg-gray-100 transition-colors text-lg font-bold">ابحث عن وظيفة</button>
+                        <a href="#jobs" class="bg-white text-brand-red px-8 py-3 rounded-full hover:bg-gray-100 transition-colors text-lg font-bold">ابحث عن وظيفة</a>
                     </div>
                 </div>
                 <div class="flex justify-center lg:w-1/2 mt-12 lg:mt-0">
