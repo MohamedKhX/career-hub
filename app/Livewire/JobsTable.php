@@ -46,6 +46,13 @@ class JobsTable extends Component implements HasForms, HasTable
                     ->searchable()
                     ->description(fn($record) => $record->short_description),
 
+                TextColumn::make('created_at')
+                    ->label('Publish Date')
+                    ->translateLabel()
+                    ->date()
+                    ->searchable(),
+
+
                 TextColumn::make('from_salary')
                     ->label('From Salary')
                     ->translateLabel()
@@ -138,7 +145,7 @@ class JobsTable extends Component implements HasForms, HasTable
 
                 SelectFilter::make('job_type')
                     ->label(__('Job Type'))
-                    ->options(JobTypeEnum::class)
+                    ->options(JobTypeEnum::getTranslations())
                     ->multiple()
                     ->searchable()
                     ->preload(),

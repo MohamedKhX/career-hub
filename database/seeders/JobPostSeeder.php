@@ -182,7 +182,6 @@ class JobPostSeeder extends Seeder
         ];
 
 
-        $categories = Category::all();
         $industries = Industry::all();
         $cities = City::all();
         $recruiters = Recruiter::all();
@@ -198,7 +197,6 @@ class JobPostSeeder extends Seeder
                 'job_type' => $jobTypes[array_rand($jobTypes)]->value,
                 'state' => JobPostStateEnum::Open,
                 'recruiter_id' => $recruiters->random()->id,
-                'category_id' => $categories->random()->id,
                 'industry_id' => $industries->random()->id,
                 'city_id' => $cities->random()->id,
             ]);

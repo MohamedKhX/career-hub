@@ -3,10 +3,10 @@
         <div class="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-4xl w-full mx-auto flex flex-col md:flex-row">
             <div class="w-full md:w-1/2 p-8 md:p-12">
                 <h2 class="text-3xl font-bold mb-6 text-center">إنشاء حساب جديد كمسؤول توظيف</h2>
-                <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                <form method="POST" action="{{ route('register-recruiter') }}" class="space-y-4">
                     @csrf
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">اسم الشركة</label>
                         <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسمك">
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
@@ -17,22 +17,22 @@
                     </div>
                     <div>
                         <label for="company_website" class="block text-sm font-medium text-gray-700 mb-1">المواقع الإلكتروني</label>
-                        <input type="text" id="company_website" company_website="company_website" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل موقع الإلكتروني">
+                        <input type="text" id="company_website" name="company_website" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل موقع الإلكتروني">
                         <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                     </div>
                     <div>
                         <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف</label>
-                        <input type="text" id="phone_number" phone_number="phone_number" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل رقم الهاتف">
+                        <input type="text" id="phone_number" name="phone_number" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل رقم الهاتف">
                         <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                     </div>
                     <div>
                         <label for="address" class="block text-sm font-medium text-gray-700 mb-1">العنوان</label>
-                        <input type="text" id="address" address="address" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل العنوان">
+                        <input type="text" id="address" name="address" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل العنوان">
                         <x-input-error :messages="$errors->get('address')" class="mt-2" />
                     </div>
                     <div>
                         <label for="city" class="block text-sm font-medium text-gray-700 mb-1">المدينة</label>
-                        <input type="text" id="city" city="city" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل المدينة">
+                        <input type="text" id="city" name="city" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل المدينة">
                         <x-input-error :messages="$errors->get('city')" class="mt-2" />
                     </div>
                     <div>

@@ -146,11 +146,11 @@ class JobApplicationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            /*->query(
+            ->query(
                 JobApplication::whereHas('jobPost', function ($query) {
                     $query->where('recruiter_id', Auth::user()->recruiter_id);
                 })
-            )*/
+            )
             ->columns([
                 TextColumn::make('jobPost.title')
                     ->label(__('Job Title'))

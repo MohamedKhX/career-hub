@@ -25,7 +25,6 @@ return new class extends Migration
                 ->default(JobPostStateEnum::Open);
 
             $table->foreignId('recruiter_id')->constrained();
-            $table->foreignId('category_id')->constrained();
             $table->foreignId('industry_id')->constrained();
             $table->foreignId('city_id')->constrained();
             $table->timestamps();

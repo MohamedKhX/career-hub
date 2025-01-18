@@ -6,6 +6,8 @@ use App\Enums\JobPostStateEnum;
 use App\Enums\JobTypeEnum;
 use App\Filament\Recruiter\Resources\JobPostResource\Pages;
 use App\Filament\Recruiter\Resources\JobPostResource\RelationManagers;
+use App\Models\City;
+use App\Models\Industry;
 use App\Models\JobPost;
 use App\Traits\HasTranslatedLabels;
 use Filament\Forms;
@@ -21,6 +23,7 @@ use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class JobPostResource extends Resource
@@ -80,31 +83,27 @@ class JobPostResource extends Resource
                             ->suffixIcon('solar-palette-round-line-duotone')
                             ->columnSpan('full'),
 
-
-                        Select::make('category_id')
-                            ->label('Category')
-                            ->translateLabel()
-                            ->relationship('category', 'name')
-                            ->required()
-                            ->searchable()
-                            ->suffixIcon('solar-notes-minimalistic-bold-duotone'),
-
                         Select::make('industry_id')
                             ->label('Industry')
                             ->translateLabel()
-                            ->relationship('industry', 'name')
+                            ->options(Industry::all()->pluck('name', 'id')->toArray())
                             ->required()
                             ->searchable()
-                            ->suffixIcon('solar-layers-minimalistic-bold-duotone'),
+                            ->suffixIcon('solar-layers-minimalistic-bold-duotone')
+                            ->columnSpan('full'),
 
                         Select::make('city_id')
                             ->label('City')
                             ->translateLabel()
-                            ->relationship('city', 'name')
+                            ->options(City::all()->pluck('name', 'id')->toArray())
                             ->searchable()
                             ->required()
                             ->suffixIcon('solar-city-bold-duotone')
                             ->columnSpan('full'),
+
+
+                        Forms\Components\Hidden::make('recruiter_id')
+                            ->default(auth()->user()->recruiter_id)
                     ])
                     ->columns(2)
             ]);
@@ -182,11 +181,9 @@ class JobPostResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return parent::getEloquentQuery()->where('recruiter_id', auth()->user()->recruiter->id);
     }
 
     public static function getPages(): array
