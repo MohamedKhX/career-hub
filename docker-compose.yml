@@ -14,7 +14,7 @@ services:
         networks:
             - sail
         environment:
-            - APP_NAME=Laravel
+            - APP_NAME=CareerHub
             - APP_ENV=local
             - APP_KEY=base64:7KMl2G56TVjkWbEt8HFMb3/kbHjZ6AObQqHpNR4kZDw=
             - APP_DEBUG=false
