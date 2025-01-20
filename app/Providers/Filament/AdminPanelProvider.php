@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 StatsOverview::class,
                 ApplicationsChart::class,
                 UsersChart::class,
-                TopCategoriesChart::class,
+
                 TopCitiesChart::class,
             ])
             ->middleware([

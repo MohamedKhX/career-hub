@@ -19,8 +19,7 @@ class Dashboard extends BaseDashboard
             StatsOverview::class,
             ApplicationsChart::class,
             UsersChart::class,
-            TopCategoriesChart::class,
             TopCitiesChart::class,
         ];
     }
-} 
+}
