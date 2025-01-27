@@ -78,61 +78,73 @@ class JobDetails extends Component implements HasForms, HasActions
                         TextInput::make('first_name')
                             ->label('First Name')
                             ->translateLabel()
-                            ->required(),
+                            ->required()
+                            ->maxLength(100)
+                            ->placeholder('أدخل اسمك الأول'),
 
                         TextInput::make('middle_name')
                             ->label('Middle Name')
                             ->translateLabel()
-                            ->required(),
+                            ->required()
+                            ->maxLength(100)
+                            ->placeholder('أدخل اسمك الأوسط'),
 
                         TextInput::make('last_name')
                             ->label('Last Name')
                             ->translateLabel()
-                            ->required(),
+                            ->required()
+                            ->maxLength(100)
+                            ->placeholder('أدخل اسمك الأخير'),
 
                         TextInput::make('email')
                             ->label('Email')
                             ->translateLabel()
                             ->required()
                             ->email()
-                            ->columnSpan('full'),
+                            ->columnSpan('full')
+                            ->placeholder('e.g. example@gmail.com'),
 
                         TextInput::make('phone')
                             ->label('Phone')
                             ->translateLabel()
                             ->required()
                             ->numeric()
-                            ->columnSpan('full'),
+                            ->regex('/^09[1-4]\d{7}$/')
+                            ->maxLength(10)
+                            ->columnSpan('full')
+                            ->placeholder('أدخل رقم هاتفك'),
 
                         TextInput::make('years_of_experience')
                             ->label('Years of Experience')
                             ->translateLabel()
                             ->numeric()
-                            ->columnSpan('full'),
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->columnSpan('full')
+                            ->placeholder('أدخل عدد سنوات الخبرة'),
 
                         TextInput::make('expected_salary')
                             ->label('Expected Salary')
                             ->translateLabel()
                             ->numeric()
-                            ->columnSpan('full'),
-
-                        TextInput::make('place_of_residence')
-                            ->label('Place of Residence')
-                            ->translateLabel()
-                            ->columnSpan('full'),
+                            ->minValue(0)
+                            ->columnSpan('full')
+                            ->placeholder('أدخل الراتب المتوقع'),
 
                         DatePicker::make('date_of_birth')
                             ->label('Date of Birth')
                             ->translateLabel()
                             ->required()
-                            ->columnSpan('full'),
+                            ->maxDate(now()->subYears(5))
+                            ->columnSpan('full')
+                            ->placeholder('اختر تاريخ ميلادك'),
 
                         RichEditor::make('cover_letter')
                             ->label('Cover Letter')
                             ->translateLabel()
                             ->required()
-                            ->columnSpan('full'),
-
+                            ->columnSpan('full')
+                            ->placeholder('اكتب رسالة التغطية الخاصة بك، موضحًا سبب اهتمامك بالوظيفة ومهاراتك وخبراتك ذات الصلة'),
                         FileUpload::make('attachments')
                             ->label('Attachments')
                             ->translateLabel()

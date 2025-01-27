@@ -164,13 +164,6 @@ class JobsTable extends Component implements HasForms, HasTable
                     ->preload()
                     ->multiple(),
 
-                SelectFilter::make('category')
-                    ->label(__('Category'))
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->multiple(),
-
                 Filter::make('created_at')
                     ->form([
                         Grid::make(2)

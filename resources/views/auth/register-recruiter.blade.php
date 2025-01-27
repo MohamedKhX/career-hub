@@ -10,14 +10,14 @@
                         <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسمك">
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
-                    <div>
+                    <div class="relative">
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل بريدك الإلكتروني">
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out pl-4" placeholder="e.g. example@gmail.com">
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div>
-                        <label for="company_website" class="block text-sm font-medium text-gray-700 mb-1">المواقع الإلكتروني</label>
-                        <input type="text" id="company_website" name="company_website" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل موقع الإلكتروني">
+                        <label for="company_website" class="block text-sm font-medium text-gray-700 mb-1">الموقع الإلكتروني</label>
+                        <input type="url" id="company_website" name="company_website" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="e.g. www.example.com">
                         <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                     </div>
                     <div>
@@ -90,5 +90,4 @@
             </div>
         </div>
     </main>
-
 </x-app-layout>

@@ -62,10 +62,10 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'company_website' => ['required', 'string', 'max:255'],
+            'company_website' => ['required', 'string', 'max:255', 'url'],
             'city' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'numeric'],
+            'phone_number' => ['required', 'string', 'regex:/^(091|092|093|094)\d{7}$/'],
         ]);
 
         $recruiter = Recruiter::create([

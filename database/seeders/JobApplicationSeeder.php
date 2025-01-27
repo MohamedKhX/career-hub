@@ -60,13 +60,12 @@ class JobApplicationSeeder extends Seeder
                 $middleName = $libyanNames['middle'][array_rand($libyanNames['middle'])];
                 $lastName = $libyanNames['last'][array_rand($libyanNames['last'])];
 
-                $application = JobApplication::create([
+                $application = JobApplication::factory()->create([
                     'job_post_id' => $jobPost->id,
                     'user_id' => $user->id,
                     'first_name' => $firstName,
                     'middle_name' => $middleName,
                     'last_name' => $lastName,
-                    'email' => strtolower(transliterator_transliterate('Any-Latin; Latin-ASCII', $firstName)) . rand(1000, 9999) . '@gmail.com',
                     'phone' => '218' . rand(911111111, 999999999),
                     'date_of_birth' => fake()->dateTimeBetween('-35 years', '-20 years')->format('Y-m-d'),
                     'place_of_residence' => $residences[array_rand($residences)],

@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'type' => 'admin',
         ]);
+
         $this->call([
             CitySeeder::class,
             IndustrySeeder::class,
