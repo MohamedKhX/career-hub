@@ -62,4 +62,15 @@ class User extends Authenticatable
     {
         return $this->applications()->where('job_post_id', $jobPost->id)->exists();
     }
+
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function hasRating(Recruiter $recruiter): bool
+    {
+        // DATABASE -> user_id = $this->Id, & , service_id = $service->id
+        return $this->ratings()->where('recruiter_id', $recruiter->id)->get()->isNotEmpty();
+    }
 }

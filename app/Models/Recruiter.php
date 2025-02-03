@@ -36,6 +36,11 @@ class Recruiter extends Model implements HasMedia
         return $this->hasMany(JobPost::class);
     }
 
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class);
+    }
+
     public function getLogoAttribute(): string
     {
         return $this->getFirstMediaUrl('logo');

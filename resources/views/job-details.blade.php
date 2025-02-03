@@ -8,11 +8,13 @@
                     <div class="space-y-4">
                         <div class="flex items-center">
                             <i data-feather="map-pin" class="w-5 h-5 mr-2"></i>
-                            <span>الرياض، المملكة العربية السعودية</span>
+                            <span>
+                                {{ $jobPost->recruiter->address }}, {{ $jobPost->recruiter->city }}
+                            </span>
                         </div>
                         <div class="flex items-center">
                             <i data-feather="globe" class="w-5 h-5 mr-2"></i>
-                            <a href="#" class="hover:underline">{{ $jobPost->recruiter->company_website }}</a>
+                            <a href="{{ $jobPost->recruiter->company_website }}" class="hover:underline">{{ $jobPost->recruiter->company_website }}</a>
                         </div>
                         <div class="flex items-center">
                             <i data-feather="users" class="w-5 h-5 mr-2"></i>
@@ -47,5 +49,6 @@
                 </div>
             </div>
         </div>
+        <livewire:rating :recruiter="$jobPost->recruiter"/>
     </main>
 </x-app-layout>
