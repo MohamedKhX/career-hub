@@ -18,6 +18,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RecruiterResource extends Resource
@@ -111,6 +112,8 @@ class RecruiterResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
+
             ]);
     }
 
@@ -127,6 +130,12 @@ class RecruiterResource extends Resource
             'index' => Pages\ListRecruiters::route('/'),
             'create' => Pages\CreateRecruiter::route('/create'),
             'edit' => Pages\EditRecruiter::route('/{record}/edit'),
+            'view' => Pages\ViewRecruiter::route('/{record}'),
         ];
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
     }
 }

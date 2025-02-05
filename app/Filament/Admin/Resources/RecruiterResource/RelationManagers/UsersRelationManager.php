@@ -16,18 +16,16 @@ class UsersRelationManager extends RelationManager
 {
     protected static string $relationship = 'users';
 
+    public function isReadOnly(): bool
+    {
+        return false;
+    }
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Fieldset::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Name')
-                            ->translateLabel()
-                            ->required()
-                            ->maxLength(50),
-
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
                             ->translateLabel()

@@ -59,12 +59,6 @@ class JobPostResource extends Resource
                             ->required()
                             ->columnSpan('full'),
 
-                        /*SpatieMediaLibraryFileUpload::make('thumbnail')
-                            ->label('Thumbnail')
-                            ->translateLabel()
-                            ->collection('thumbnail')
-                            ->columnSpan('full'),*/
-
                         TextInput::make('from_salary')
                             ->label('From Salary')
                             ->translateLabel()
@@ -142,11 +136,6 @@ class JobPostResource extends Resource
                     ->label('Job Type')
                     ->translateLabel()
                     ->formatStateUsing(fn($state) => $state->translate())
-                    ->badge(),
-
-                TextColumn::make('category.name')
-                    ->label('Category')
-                    ->translateLabel()
                     ->badge(),
 
                 TextColumn::make('industry.name')
