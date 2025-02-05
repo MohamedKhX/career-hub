@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class RegisteredUserController extends Controller
 {
@@ -37,13 +39,19 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'middle_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
+            'phone_number' => ['required', 'string', 'regex:/^(091|092|093|094)\d{7}$/'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => UserTypeEnum::JobSeeker
@@ -56,16 +64,22 @@ class RegisteredUserController extends Controller
         return redirect(route('home', absolute: false));
     }
 
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function storeRecruiter(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'company_website' => ['required', 'string', 'max:255', 'url'],
+            'company_website' => ['nullable', 'string', 'max:255', 'url'],
             'city' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'regex:/^(091|092|093|094)\d{7}$/'],
+            'logo' => ['file', 'image', 'max:2048'], // Add validation for logo
+
         ]);
 
         $recruiter = Recruiter::create([
@@ -76,14 +90,16 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone_number,
         ]);
 
+        if ($request->hasFile('logo')) {
+            $recruiter->addMediaFromRequest('logo')
+                ->toMediaCollection('logo');
+        }
 
         $recruiter->users()->create([
-            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => UserTypeEnum::Recruiter
         ]);
-
 
         event(new Registered($recruiter->users->first()));
 

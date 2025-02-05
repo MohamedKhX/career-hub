@@ -4,25 +4,7 @@
             <h2 class="text-3xl font-bold mb-6 text-center">تقييمات الشركة</h2>
             <div class="space-y-6">
                 @foreach($ratings as $rating)
-                    <div class="bg-gray-50 rounded-lg p-6 transition-all duration-300 hover:shadow-lg">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h5 class="text-xl font-semibold">{{ $rating->user->name }}</h5>
-                                @if($rating->rating == \App\Enums\RatingEnum::Terrible)
-                                    <span class="inline-block bg-red-700 text-white text-sm px-3 py-1 rounded-full mt-2">سيء جداً</span>
-                                @elseif($rating->rating == \App\Enums\RatingEnum::Bad)
-                                    <span class="inline-block bg-red-500 text-white text-sm px-3 py-1 rounded-full mt-2">سيء</span>
-                                @elseif($rating->rating == \App\Enums\RatingEnum::Average)
-                                    <span class="inline-block bg-yellow-400 text-white text-sm px-3 py-1 rounded-full mt-2">متوسط</span>
-                                @elseif($rating->rating == \App\Enums\RatingEnum::Good)
-                                    <span class="inline-block bg-yellow-500 text-white text-sm px-3 py-1 rounded-full mt-2">جيد</span>
-                                @elseif($rating->rating == \App\Enums\RatingEnum::Excellent)
-                                    <span class="inline-block bg-green-500 text-white text-sm px-3 py-1 rounded-full mt-2">ممتاز</span>
-                                @endif
-                            </div>
-                        </div>
-                        <p class="text-gray-600">{{ $rating->review }}</p>
-                    </div>
+                    <livewire:rating-box :rating="$rating" :key="$rating->id" />
                 @endforeach
             </div>
 

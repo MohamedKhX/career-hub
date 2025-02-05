@@ -28,5 +28,13 @@ return [
         JobApplicationStateEnum::Pending->value => 'قيد الانتظار',
         JobApplicationStateEnum::Accepted->value => 'مقبول',
         JobApplicationStateEnum::Rejected->value => 'مرفوض',
+    ],
+
+    'rating_enum' => [
+        \App\Enums\RatingEnum::Terrible->value => 'سيئ جدا',
+        \App\Enums\RatingEnum::Bad->value => 'سيء',
+        \App\Enums\RatingEnum::Average->value => 'متوسط',
+        \App\Enums\RatingEnum::Good->value => 'جيد',
+        \App\Enums\RatingEnum::Excellent->value => 'ممتاز',
     ]
 ];

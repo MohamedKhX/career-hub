@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserTypeEnum;
 use Filament\Forms\Components\Hidden;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -70,7 +71,17 @@ class User extends Authenticatable
 
     public function hasRating(Recruiter $recruiter): bool
     {
-        // DATABASE -> user_id = $this->Id, & , service_id = $service->id
         return $this->ratings()->where('recruiter_id', $recruiter->id)->get()->isNotEmpty();
+    }
+
+    public function name(): Attribute
+    {
+        return new Attribute(function ($value) {
+            if($this->first_name == null) {
+                return $this->recruiter->company_name;
+            }
+
+            return $this->first_name . ' ' . $this->last_name;
+        });
     }
 }

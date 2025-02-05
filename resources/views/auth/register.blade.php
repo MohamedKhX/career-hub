@@ -7,8 +7,22 @@
                     @csrf
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
-                        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسمك">
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <input type="text" id="first_name" name="first_name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسمك">
+                        <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+                    </div>
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">اسم الأب</label>
+                        <input type="text" id="middle_name" name="middle_name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسم الأب">
+                        <x-input-error :messages="$errors->get('middle_name')" class="mt-2" />
+                    </div>
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">اللقب</label>
+                        <input type="text" id="last_name" name="last_name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اللقب">
+                        <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                    </div>   <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف</label>
+                        <input type="text" id="phone_number" name="phone_number" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="ادخل رقم الهاتف">
+                        <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>

@@ -41,6 +41,7 @@ class JobDetails extends Component implements HasForms, HasActions
 
     public function applyAction(): Action
     {
+        $user = auth()->user();
         return Action::make('apply')
             ->label(function ($arguments) {
                 if($arguments['viewMode']) {
@@ -80,21 +81,24 @@ class JobDetails extends Component implements HasForms, HasActions
                             ->translateLabel()
                             ->required()
                             ->maxLength(100)
-                            ->placeholder('أدخل اسمك الأول'),
+                            ->placeholder('أدخل اسمك الأول')
+                            ->default($user->first_name),
 
                         TextInput::make('middle_name')
                             ->label('Middle Name')
                             ->translateLabel()
                             ->required()
                             ->maxLength(100)
-                            ->placeholder('أدخل اسمك الأوسط'),
+                            ->placeholder('أدخل اسمك الأوسط')
+                            ->default($user->middle_name),
 
                         TextInput::make('last_name')
                             ->label('Last Name')
                             ->translateLabel()
                             ->required()
                             ->maxLength(100)
-                            ->placeholder('أدخل اسمك الأخير'),
+                            ->placeholder('أدخل اسمك الأخير')
+                            ->default($user->last_name),
 
                         TextInput::make('email')
                             ->label('Email')
@@ -102,7 +106,8 @@ class JobDetails extends Component implements HasForms, HasActions
                             ->required()
                             ->email()
                             ->columnSpan('full')
-                            ->placeholder('e.g. example@gmail.com'),
+                            ->placeholder('e.g. example@gmail.com')
+                            ->default($user->email),
 
                         TextInput::make('phone')
                             ->label('Phone')
@@ -112,7 +117,8 @@ class JobDetails extends Component implements HasForms, HasActions
                             ->regex('/^09[1-4]\d{7}$/')
                             ->maxLength(10)
                             ->columnSpan('full')
-                            ->placeholder('أدخل رقم هاتفك'),
+                            ->placeholder('أدخل رقم هاتفك')
+                            ->default($user->phone_number),
 
                         TextInput::make('years_of_experience')
                             ->label('Years of Experience')

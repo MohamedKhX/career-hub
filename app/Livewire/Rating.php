@@ -14,6 +14,13 @@ class Rating extends Component
     public $rating = RatingEnum::Average->value;
     public Recruiter $recruiter;
 
+    protected $listeners = ['reRender'];
+
+    public function reRender()
+    {
+        $this->render();
+    }
+
     public function submit(): void
     {
         $this->validate();

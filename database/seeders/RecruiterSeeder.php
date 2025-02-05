@@ -65,7 +65,7 @@ class RecruiterSeeder extends Seeder
                 ->toMediaCollection('logo');
 
             User::create([
-                'name' => 'مسؤول التوظيف ' . ($index + 1),
+                'first_name' => null,
                 'email' => 'recruiter' . ($index + 1) . '@example.com',
                 'password' => Hash::make('password'),
                 'type' => UserTypeEnum::Recruiter,

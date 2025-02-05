@@ -3,11 +3,11 @@
         <div class="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-4xl w-full mx-auto flex flex-col md:flex-row">
             <div class="w-full md:w-1/2 p-8 md:p-12">
                 <h2 class="text-3xl font-bold mb-6 text-center">إنشاء حساب جديد كمسؤول توظيف</h2>
-                <form method="POST" action="{{ route('register-recruiter') }}" class="space-y-4">
+                <form method="POST" action="{{ route('register-recruiter') }}" class="space-y-4" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">اسم الشركة</label>
-                        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسمك">
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أدخل اسم الشركة">
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div class="relative">
@@ -17,7 +17,7 @@
                     </div>
                     <div>
                         <label for="company_website" class="block text-sm font-medium text-gray-700 mb-1">الموقع الإلكتروني</label>
-                        <input type="url" id="company_website" name="company_website" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="e.g. www.example.com">
+                        <input type="url" id="company_website" name="company_website"  class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="e.g. www.example.com">
                         <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                     </div>
                     <div>
@@ -43,6 +43,11 @@
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">تأكيد كلمة المرور</label>
                         <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out" placeholder="أعد إدخال كلمة المرور">
+                    </div>
+                    <div>
+                        <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">شعار الشركة</label>
+                        <input type="file" id="logo" name="logo" class="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-brand-red focus:border-brand-red transition duration-300 ease-in-out">
+                        <x-input-error :messages="$errors->get('logo')" class="mt-2" />
                     </div>
                     <div>
                         <button type="submit" class="w-full bg-brand-red text-white py-2 px-4 rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
