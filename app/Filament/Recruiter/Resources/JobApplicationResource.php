@@ -5,8 +5,11 @@ namespace App\Filament\Recruiter\Resources;
 use App\Enums\JobApplicationStateEnum;
 use App\Filament\Recruiter\Resources\JobApplicationResource\Pages;
 use App\Models\JobApplication;
+use App\Notifications\AcceptedApplicationNotification;
+use App\Notifications\RejectedApplicationNotification;
 use App\Traits\HasTranslatedLabels;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -197,6 +200,14 @@ class JobApplicationResource extends Resource
                     ->translateLabel()
                     ->icon('solar-sort-outline')
                     ->badge()
+                    ->color(function ($state) {
+                        if($state == JobApplicationStateEnum::Pending) {
+                            return Color::Yellow;
+                        } elseif($state == JobApplicationStateEnum::Accepted) {
+                            return Color::Green;
+                        }
+                        return Color::Red;
+                    })
                     ->formatStateUsing(fn($state) => $state->translate()),
             ])
             ->filters([
@@ -239,7 +250,31 @@ class JobApplicationResource extends Resource
                     ->action(function ($record) {
                         $record->update(['state' => JobApplicationStateEnum::Rejected]);
 
+                        $user = $record->user;
 
+                        $user->notify(new RejectedApplicationNotification($record->jobPost->recruiter, $record->jobPost));
+                    }),
+
+                Action::make('accept')
+                    ->label('Accept')
+                    ->translateLabel()
+                    ->requiresConfirmation()
+                    ->form([
+                        DateTimePicker::make('interview_time')
+                            ->label('Interview Time')
+                            ->translateLabel()
+                            ->required()
+                            ->rules(['after_or_equal:today'])
+                    ])
+                    ->color('success')
+                    ->icon('solar-zip-file-bold')
+                    ->hidden(fn ($record) => $record->state != JobApplicationStateEnum::Pending)
+                    ->action(function ($record, $data) {
+                        $record->update(['state' => JobApplicationStateEnum::Accepted]);
+
+                        $user = $record->user;
+
+                        $user->notify(new AcceptedApplicationNotification($record->jobPost->recruiter, $record->jobPost, $data['interview_time']));
                     })
             ])
             ->defaultSort('created_at', 'desc')

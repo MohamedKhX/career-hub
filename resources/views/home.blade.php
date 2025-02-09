@@ -1,21 +1,81 @@
 <x-app-layout>
-    <section class="bg-gradient-to-l from-brand-dark to-brand-red text-white py-20 lg:py-32">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col content-between lg:flex-row items-center">
-                <div class="lg:w-1/2 lg:pr-12 text-right">
-                    <h1 class="text-4xl lg:text-6xl font-extrabold mb-6 leading-tight">اكتشف مستقبلك المهني مع CareerHub</h1>
-                    <p class="text-xl lg:text-2xl mb-8 opacity-90">نحن نربط المواهب بالفرص. ابدأ رحلتك المهنية اليوم واستكشف آلاف الوظائف المميزة من أفضل الشركات في المنطقة.</p>
-                    <div class="flex flex-col sm:flex-row justify-start space-y-4 sm:space-y-0 sm:space-x-4 sm:space-x-reverse">
-                        <a href="#jobs" class="bg-white text-brand-red px-8 py-3 rounded-full hover:bg-gray-100 transition-colors text-lg font-bold">ابحث عن وظيفة</a>
+    @push('styles')
+        <style>
+            .slider-container {
+                overflow: hidden;
+                position: relative;
+            }
+            .slider {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+            .slide {
+                flex: 0 0 100%;
+                width: 100%;
+            }
+            .slide-indicators {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 10px;
+                z-index: 10;
+            }
+            .slide-indicator {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.5);
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .slide-indicator.active {
+                background-color: #FF3366;
+            }
+        </style>
+    @endpush
+    <section class="relative h-[600px] slider-container">
+            <div class="slider h-full">
+                <div class="slide relative">
+                    <img src="https://images.unsplash.com/photo-1738447429433-69e3ecd0bdd0?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8" alt="فرص وظيفية مميزة" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <h1 class="text-5xl font-bold mb-4">ابدأ مسيرتك المهنية مع CareerHub</h1>
+                            <p class="text-xl mb-8">اكتشف آلاف الفرص الوظيفية في مختلف المجالات</p>
+                            <a href="#" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">ابحث عن وظيفة الآن</a>
+                        </div>
                     </div>
                 </div>
-                <div class="flex justify-center lg:w-1/2 mt-12 lg:mt-0">
-                    <img width="600" src="https://images.unsplash.com/photo-1506784926709-22f1ec395907?q=80&w=2668&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="فريق عمل" class="rounded-lg shadow-2xl">
+                <div class="slide relative">
+                    <img src="https://plus.unsplash.com/premium_photo-1734549547939-41f90fdf91cf?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8" alt="تعرف على أفضل الشركات" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <h1 class="text-5xl font-bold mb-4">تعرف على أفضل الشركات</h1>
+                            <p class="text-xl mb-8">استكشف ثقافات الشركات وفرص النمو المهني</p>
+                            <a href="#" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">تصفح الشركات</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide relative">
+                    <img src="https://images.unsplash.com/photo-1738748986807-bf1e6d00d58d?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8" alt="طور مهاراتك المهنية" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <h1 class="text-5xl font-bold mb-4">طور مهاراتك المهنية</h1>
+                            <p class="text-xl mb-8">استفد من مواردنا التعليمية ونصائح الخبراء</p>
+                            <a href="#" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">اكتشف الموارد</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+            <button id="prevBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 focus:outline-none z-10">
+                <i data-feather="chevron-right" class="w-6 h-6"></i>
+            </button>
+            <button id="nextBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 focus:outline-none z-10">
+                <i data-feather="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <div class="slide-indicators"></div>
+        </section>
     <section class="py-16 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-8 text-center">لماذا CareerHub؟</h2>
@@ -61,25 +121,25 @@
             <div class="grid md:grid-cols-4 gap-8 text-center">
                 <div>
                     <h4 class="text-4xl font-bold mb-2">
-                        {{ $jobPostsCount }} +
+                        {{ $jobPostsCount }}
                     </h4>
                     <p class="text-xl">إعلان وظيفي</p>
                 </div>
                 <div>
                     <h4 class="text-4xl font-bold mb-2">
-                        {{ $companiesCount }} +
+                        {{ $companiesCount }}
                     </h4>
                     <p class="text-xl">شركة</p>
                 </div>
                 <div>
                     <h4 class="text-4xl font-bold mb-2">
-                        {{ $jobApplicationsCount }} +
+                        {{ $jobApplicationsCount }}
                     </h4>
                     <p class="text-xl">مرشح</p>
                 </div>
                 <div>
                     <h4 class="text-4xl font-bold mb-2">
-                        {{ $userCount }} +
+                        {{ $userCount }}
                     </h4>
                     <p class="text-xl">مستخدم</p>
                 </div>
@@ -90,7 +150,6 @@
     <!-- Top Companies Section -->
     <section id="companies" class="py-16 bg-white">
         <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-8">أفضل الشركات التي توظف</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 @foreach($companies as $company)
                     <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
@@ -101,4 +160,73 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+       <script>
+                    feather.replace();
+
+                    const slider = document.querySelector('.slider');
+                    const slides = document.querySelectorAll('.slide');
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    const slideIndicatorsContainer = document.querySelector('.slide-indicators');
+                    let currentSlide = 0;
+
+                    // Create slide indicators
+                    if (slideIndicatorsContainer) {
+                        slides.forEach((_, index) => {
+                            const indicator = document.createElement('div');
+                            indicator.classList.add('slide-indicator');
+                            indicator.addEventListener('click', () => showSlide(index));
+                            slideIndicatorsContainer.appendChild(indicator);
+                        });
+                    }
+
+                    const indicators = document.querySelectorAll('.slide-indicator');
+
+                    function updateIndicators() {
+                        indicators.forEach((indicator, index) => {
+                            if (index === currentSlide) {
+                                indicator.classList.add('active');
+                            } else {
+                                indicator.classList.remove('active');
+                            }
+                        });
+                    }
+
+                    function showSlide(n) {
+                        currentSlide = (n + slides.length) % slides.length;
+                        slider.style.transform = `translateX(${currentSlide * 100}%)`;
+                        updateIndicators();
+                    }
+
+                    function nextSlide() {
+                        showSlide(currentSlide - 1);  // Changed from + to - for RTL
+                    }
+
+                    function prevSlide() {
+                        showSlide(currentSlide + 1);  // Changed from - to + for RTL
+                    }
+
+                    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+                    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+                    // Auto-advance slides every 5 seconds
+                    let slideInterval = setInterval(nextSlide, 5000);
+
+                    // Pause auto-advance when hovering over the slider
+                    if (slider) {
+                        slider.addEventListener('mouseenter', () => {
+                            clearInterval(slideInterval);
+                        });
+
+                        slider.addEventListener('mouseleave', () => {
+                            slideInterval = setInterval(nextSlide, 5000);
+                        });
+                    }
+
+                    // Initialize the first slide
+                    showSlide(0);
+                </script>
+    @endpush
 </x-app-layout>

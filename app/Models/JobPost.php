@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\JobPostStateEnum;
 use App\Enums\JobTypeEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -55,5 +56,10 @@ class JobPost extends Model implements HasMedia
     public function applications(): HasMany
     {
         return $this->hasMany(JobApplication::class);
+    }
+
+    public function logo(): Attribute
+    {
+        return Attribute::get(fn() => $this->getFirstMediaUrl('logo'));
     }
 }

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <main class="container mx-auto px-6 py-8">
+    <main class="container mx-auto px-6 py-8 mt-20">
         <div class="bg-white shadow-2xl rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-3xl">
             <div class="md:flex">
                 <div class="md:w-1/3 bg-gradient-to-br from-brand-red to-pink-500 p-8 text-white">

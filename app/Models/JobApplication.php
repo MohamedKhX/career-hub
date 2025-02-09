@@ -28,6 +28,11 @@ class JobApplication extends Model implements HasMedia
         return Attribute::get(fn() => $this->getMedia('attachments'));
     }
 
+    public function recruiter(): BelongsTo
+    {
+        return $this->belongsTo(Recruiter::class);
+    }
+
     public function jobPost(): BelongsTo
     {
         return $this->belongsTo(JobPost::class);
