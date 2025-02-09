@@ -120,7 +120,8 @@ class RecruiterResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\UsersRelationManager::make()
+            RelationManagers\UsersRelationManager::make(),
+            RelationManagers\RatingsRelationManager::make()
         ];
     }
 

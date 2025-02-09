@@ -153,43 +153,57 @@ class JobApplicationResource extends Resource
             )
             ->columns([
                 TextColumn::make('jobPost.title')
-                    ->label(__('Job Title'))
+                    ->label('Job Title')
+                    ->translateLabel()
                     ->icon('solar-document-text-bold-duotone')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('user.name')
-                    ->label(__('Applicant'))
+                    ->label('Applicant')
+                    ->translateLabel()
                     ->icon('solar-user-bold-duotone')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('email')
-                    ->label(__('Email'))
+                    ->label('Email')
+                    ->translateLabel()
                     ->icon('solar-letter-bold-duotone')
                     ->searchable(),
 
                 TextColumn::make('phone')
-                    ->label(__('Phone'))
+                    ->label('Phone')
+                    ->translateLabel()
                     ->icon('solar-phone-bold-duotone')
                     ->searchable(),
 
                 TextColumn::make('expected_salary')
-                    ->label(__('Expected Salary'))
+                    ->label('Expected Salary')
+                    ->translateLabel()
                     ->icon('solar-wallet-money-bold-duotone')
                     ->money('LYD')
                     ->sortable(),
 
                 TextColumn::make('created_at')
-                    ->label(__('Applied At'))
+                    ->label('Applied At')
+                    ->translateLabel()
                     ->icon('solar-calendar-bold-duotone')
                     ->dateTime()
                     ->sortable(),
+
+                TextColumn::make('state')
+                    ->label('State')
+                    ->translateLabel()
+                    ->icon('solar-sort-outline')
+                    ->badge()
+                    ->formatStateUsing(fn($state) => $state->translate()),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('state')
-                    ->label(__('State'))
-                    ->options(JobApplicationStateEnum::class),
+                    ->label('State')
+                    ->translateLabel()
+                    ->options(JobApplicationStateEnum::getTranslations()),
 
                 Tables\Filters\Filter::make('created_at')
                     ->form([
@@ -214,7 +228,19 @@ class JobApplicationResource extends Resource
                     }),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
+                Tables\Actions\ViewAction::make(),
+                Action::make('reject')
+                    ->label('Reject')
+                    ->translateLabel()
+                    ->requiresConfirmation()
+                    ->color('danger')
+                    ->icon('solar-zip-file-bold')
+                    ->hidden(fn ($record) => $record->state != JobApplicationStateEnum::Pending)
+                    ->action(function ($record) {
+                        $record->update(['state' => JobApplicationStateEnum::Rejected]);
+
+
+                    })
             ])
             ->defaultSort('created_at', 'desc')
             ->poll('10s');

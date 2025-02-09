@@ -14,10 +14,12 @@
                 <span class="inline-block bg-green-500 text-white text-sm px-3 py-1 rounded-full mt-2">ممتاز</span>
             @endif
         </div>
-        <div class="flex gap-3">
-            <div>{{ $this->deleteAction }}</div>
-            <div>{{ $this->editAction }}</div>
-        </div>
+        @if(auth()->id() == $rating->user->id)
+            <div class="flex gap-3">
+                <div>{{ $this->deleteAction }}</div>
+                <div>{{ $this->editAction }}</div>
+            </div>
+        @endif
     </div>
     <p class="text-gray-600">{{ $rating->review }}</p>
 

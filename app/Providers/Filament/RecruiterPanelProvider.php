@@ -29,7 +29,6 @@ class RecruiterPanelProvider extends PanelProvider
         return $panel
             ->id('recruiter')
             ->path('recruiter')
-            ->login()
             ->colors([
                 'primary'   => Color::Blue,
                 'gray'      => Color::Gray,

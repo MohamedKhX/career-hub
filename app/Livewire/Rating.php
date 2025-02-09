@@ -3,7 +3,10 @@
 namespace App\Livewire;
 
 use App\Enums\RatingEnum;
+use App\Enums\UserTypeEnum;
 use App\Models\Recruiter;
+use App\Models\User;
+use Filament\Notifications\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -33,6 +36,11 @@ class Rating extends Component
 
         $rating->save();
 
+        Notification::make('new-rating')
+            ->body(__('New Rating added') . __(' for ') . $this->recruiter->company_name)
+            ->success()
+            ->sendToDatabase(User::where('type', UserTypeEnum::Admin)->get())
+            ->sendToDatabase(User::where('recruiter_id', $this->recruiter->id)->get());
     }
 
     public function render()

@@ -2,6 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Admin\Widgets\ApplicationsChart;
+use App\Filament\Admin\Widgets\StatsOverview;
+use App\Filament\Admin\Widgets\TopCitiesChart;
+use App\Filament\Admin\Widgets\UsersChart;
+use App\Filament\Widgets\TopCategoriesChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -10,18 +15,12 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Widgets\StatsOverview;
-use App\Filament\Widgets\ApplicationsChart;
-use App\Filament\Widgets\UsersChart;
-use App\Filament\Widgets\TopCategoriesChart;
-use App\Filament\Widgets\TopCitiesChart;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,7 +29,6 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
-            ->login()
             ->colors([
                 'primary'   => Color::Rose,
                 'gray'      => Color::Gray,
@@ -51,9 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
                 StatsOverview::class,
-                ApplicationsChart::class,
                 UsersChart::class,
-
                 TopCitiesChart::class,
             ])
             ->middleware([
@@ -70,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->databaseNotifications()
             ->font('Rubik');
     }
 }

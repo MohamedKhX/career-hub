@@ -2,11 +2,11 @@
 
 namespace App\Filament\Admin\Pages;
 
-use App\Filament\Widgets\ApplicationsChart;
-use App\Filament\Widgets\StatsOverview;
+use App\Filament\Admin\Widgets\ApplicationsChart;
+use App\Filament\Admin\Widgets\StatsOverview;
+use App\Filament\Admin\Widgets\TopCitiesChart;
+use App\Filament\Admin\Widgets\UsersChart;
 use App\Filament\Widgets\TopCategoriesChart;
-use App\Filament\Widgets\TopCitiesChart;
-use App\Filament\Widgets\UsersChart;
 use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard

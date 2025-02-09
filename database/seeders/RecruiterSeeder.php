@@ -56,7 +56,7 @@ class RecruiterSeeder extends Seeder
                 'company_name' => $company['company_name'],
                 'company_website' => 'https://www.example.com',
                 'description' => $company['description'],
-                'phone_number' => '218' . rand(911111111, 999999999),
+                'phone_number' => '0910000000',
                 'address' => 'عنوان الشركة',
                 'city' => $company['city'],
             ]);

@@ -10,6 +10,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UsersRelationManager extends RelationManager
@@ -73,5 +74,25 @@ class UsersRelationManager extends RelationManager
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);
+    }
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Users');
+    }
+
+    public static function getRecordLabel(): string
+    {
+        return __('User');
+    }
+
+    public static function getModelLabel(): ?string
+    {
+        return __('User');
+    }
+
+    public static function getPluralModelLabel(): ?string
+    {
+        return __('Users');
     }
 }

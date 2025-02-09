@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\JobApplicationStateEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class JobApplication extends Model implements HasMedia
         'date_of_birth' => 'date',
         'expected_salary' => 'decimal:2',
         'years_of_experience' => 'integer',
+        'state' => JobApplicationStateEnum::class,
     ];
 
     public function attachments(): Attribute
