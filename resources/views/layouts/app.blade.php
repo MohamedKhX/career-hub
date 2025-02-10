@@ -47,7 +47,7 @@
     @filamentStyles
 </head>
 <body class="font-sans bg-gray-50 text-brand-dark">
-<header class="bg-white shadow-md relative">
+<header class="bg-white shadow-md relative mb-20">
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50 px-6 py-4">
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-4 space-x-reverse">

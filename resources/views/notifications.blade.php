@@ -1,5 +1,5 @@
 <x-app-layout>
-    <main class="container mx-auto px-6 py-12 mt-28">
+    <main class="container mx-auto px-6 py-12">
         <h1 class="text-3xl font-bold mb-8">الإشعارات</h1>
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             @forelse($notifications as $notification)

@@ -38,32 +38,32 @@
     <section class="relative h-[600px] slider-container">
             <div class="slider h-full">
                 <div class="slide relative">
-                    <img src="https://images.unsplash.com/photo-1738447429433-69e3ecd0bdd0?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8" alt="فرص وظيفية مميزة" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/img1.png') }}" alt="فرص وظيفية مميزة" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div class="text-center text-white">
                             <h1 class="text-5xl font-bold mb-4">ابدأ مسيرتك المهنية مع CareerHub</h1>
                             <p class="text-xl mb-8">اكتشف آلاف الفرص الوظيفية في مختلف المجالات</p>
-                            <a href="#" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">ابحث عن وظيفة الآن</a>
+                            <a href="#jobs" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">ابحث عن وظيفة الآن</a>
                         </div>
                     </div>
                 </div>
                 <div class="slide relative">
-                    <img src="https://plus.unsplash.com/premium_photo-1734549547939-41f90fdf91cf?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8" alt="تعرف على أفضل الشركات" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/img2.png') }}" alt="تعرف على أفضل الشركات" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div class="text-center text-white">
                             <h1 class="text-5xl font-bold mb-4">تعرف على أفضل الشركات</h1>
                             <p class="text-xl mb-8">استكشف ثقافات الشركات وفرص النمو المهني</p>
-                            <a href="#" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">تصفح الشركات</a>
+                            <a href="#jobs" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">ابحث عن وظيفة الآن</a>
                         </div>
                     </div>
                 </div>
                 <div class="slide relative">
-                    <img src="https://images.unsplash.com/photo-1738748986807-bf1e6d00d58d?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8" alt="طور مهاراتك المهنية" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/img3.png') }}" alt="طور مهاراتك المهنية" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                         <div class="text-center text-white">
-                            <h1 class="text-5xl font-bold mb-4">طور مهاراتك المهنية</h1>
-                            <p class="text-xl mb-8">استفد من مواردنا التعليمية ونصائح الخبراء</p>
-                            <a href="#" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">اكتشف الموارد</a>
+                            <h1 class="text-5xl font-bold mb-4">ابدأ رحلتك المهنية</h1>
+                            <p class="text-xl mb-8">اكتشف فرص العمل المثالية لك</p>
+                            <a href="#jobs" class="bg-brand-red text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors">تصفح الوظائف الآن</a>
                         </div>
                     </div>
                 </div>
