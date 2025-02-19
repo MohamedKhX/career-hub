@@ -35,6 +35,8 @@
             }
         </style>
     @endpush
+
+
     <section class="relative h-[600px] slider-container">
             <div class="slider h-full">
                 <div class="slide relative">
@@ -105,6 +107,20 @@
         </div>
     </section>
 
+    <!-- Top Companies Section -->
+    <section id="companies" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    @foreach($companies as $company)
+                        <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+                            <img src="{{ $company->logo }}" alt="" class="w-16 h-16 mx-auto mb-4">
+                            <h4 class="font-semibold">{{ $company->company_name }}</h4>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
     <!-- Featured Jobs Section -->
     <section id="jobs" class="py-16 bg-gray-100">
         <div class="container mx-auto px-6">
@@ -147,86 +163,72 @@
         </div>
     </section>
 
-    <!-- Top Companies Section -->
-    <section id="companies" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                @foreach($companies as $company)
-                    <div class="bg-gray-100 p-6 rounded-lg text-center hover:shadow-md transition-shadow">
-                        <img src="{{ $company->logo }}" alt="" class="w-16 h-16 mx-auto mb-4">
-                        <h4 class="font-semibold">{{ $company->company_name }}</h4>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
     @push('scripts')
-       <script>
-                    feather.replace();
+        <script>
+            feather.replace();
 
-                    const slider = document.querySelector('.slider');
-                    const slides = document.querySelectorAll('.slide');
-                    const prevBtn = document.getElementById('prevBtn');
-                    const nextBtn = document.getElementById('nextBtn');
-                    const slideIndicatorsContainer = document.querySelector('.slide-indicators');
-                    let currentSlide = 0;
+            const mainSlider = document.querySelector('.slider');
+            const mainSlides = document.querySelectorAll('.slide');
+            const mainPrevBtn = document.getElementById('prevBtn');
+            const mainNextBtn = document.getElementById('nextBtn');
+            const mainSlideIndicatorsContainer = document.querySelector('.slide-indicators');
+            let mainCurrentSlide = 0;
 
-                    // Create slide indicators
-                    if (slideIndicatorsContainer) {
-                        slides.forEach((_, index) => {
-                            const indicator = document.createElement('div');
-                            indicator.classList.add('slide-indicator');
-                            indicator.addEventListener('click', () => showSlide(index));
-                            slideIndicatorsContainer.appendChild(indicator);
-                        });
+            // Create slide indicators
+            if (mainSlideIndicatorsContainer) {
+                mainSlides.forEach((_, index) => {
+                    const indicator = document.createElement('div');
+                    indicator.classList.add('slide-indicator');
+                    indicator.addEventListener('click', () => showMainSlide(index));
+                    mainSlideIndicatorsContainer.appendChild(indicator);
+                });
+            }
+
+            const mainIndicators = document.querySelectorAll('.slide-indicator');
+
+            function updateMainIndicators() {
+                mainIndicators.forEach((indicator, index) => {
+                    if (index === mainCurrentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
                     }
+                });
+            }
 
-                    const indicators = document.querySelectorAll('.slide-indicator');
+            function showMainSlide(n) {
+                mainCurrentSlide = (n + mainSlides.length) % mainSlides.length;
+                mainSlider.style.transform = `translateX(${mainCurrentSlide * 100}%)`;
+                updateMainIndicators();
+            }
 
-                    function updateIndicators() {
-                        indicators.forEach((indicator, index) => {
-                            if (index === currentSlide) {
-                                indicator.classList.add('active');
-                            } else {
-                                indicator.classList.remove('active');
-                            }
-                        });
-                    }
+            function nextMainSlide() {
+                showMainSlide(mainCurrentSlide - 1);  // Changed from + to - for RTL
+            }
 
-                    function showSlide(n) {
-                        currentSlide = (n + slides.length) % slides.length;
-                        slider.style.transform = `translateX(${currentSlide * 100}%)`;
-                        updateIndicators();
-                    }
+            function prevMainSlide() {
+                showMainSlide(mainCurrentSlide + 1);  // Changed from - to + for RTL
+            }
 
-                    function nextSlide() {
-                        showSlide(currentSlide - 1);  // Changed from + to - for RTL
-                    }
+            if (mainNextBtn) mainNextBtn.addEventListener('click', nextMainSlide);
+            if (mainPrevBtn) mainPrevBtn.addEventListener('click', prevMainSlide);
 
-                    function prevSlide() {
-                        showSlide(currentSlide + 1);  // Changed from - to + for RTL
-                    }
+            // Auto-advance slides every 5 seconds
+            let mainSlideInterval = setInterval(nextMainSlide, 5000);
 
-                    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-                    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            // Pause auto-advance when hovering over the slider
+            if (mainSlider) {
+                mainSlider.addEventListener('mouseenter', () => {
+                    clearInterval(mainSlideInterval);
+                });
 
-                    // Auto-advance slides every 5 seconds
-                    let slideInterval = setInterval(nextSlide, 5000);
+                mainSlider.addEventListener('mouseleave', () => {
+                    mainSlideInterval = setInterval(nextMainSlide, 5000);
+                });
+            }
 
-                    // Pause auto-advance when hovering over the slider
-                    if (slider) {
-                        slider.addEventListener('mouseenter', () => {
-                            clearInterval(slideInterval);
-                        });
-
-                        slider.addEventListener('mouseleave', () => {
-                            slideInterval = setInterval(nextSlide, 5000);
-                        });
-                    }
-
-                    // Initialize the first slide
-                    showSlide(0);
-                </script>
+            // Initialize the first slide
+            showMainSlide(0);
+        </script>
     @endpush
 </x-app-layout>

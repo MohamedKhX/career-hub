@@ -200,6 +200,8 @@ class JobDetails extends Component implements HasForms, HasActions
                         }
                     }
                 }
+
+                $this->dispatch('reRender');
             });
     }
 

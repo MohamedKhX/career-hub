@@ -39,7 +39,6 @@ class Rating extends Component
         Notification::make('new-rating')
             ->body(__('New Rating added') . __(' for ') . $this->recruiter->company_name)
             ->success()
-            ->sendToDatabase(User::where('type', UserTypeEnum::Admin)->get())
             ->sendToDatabase(User::where('recruiter_id', $this->recruiter->id)->get());
     }
 

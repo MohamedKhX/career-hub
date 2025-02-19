@@ -6,6 +6,7 @@ use App\Enums\UserTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Recruiter;
 use App\Models\User;
+use Filament\Notifications\Notification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -120,6 +121,11 @@ class RegisteredUserController extends Controller
         event(new Registered($recruiter->users->first()));
 
         Auth::login($recruiter->users->first());
+
+        Notification::make('new-recruiter')
+            ->body(__('New Recruiter added ') . $recruiter->company_name)
+            ->success()
+            ->sendToDatabase(User::where('type', UserTypeEnum::Admin)->get());
 
         return redirect(route('home', absolute: false));
     }

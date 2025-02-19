@@ -1,11 +1,13 @@
 <div>
     @auth
-        @if(! auth()->user()->appliedTo($this->record))
-            {{ ($this->applyAction)(['viewMode' => true]) }}
+        @if(auth()->user()->type == \App\Enums\UserTypeEnum::JobSeeker)
+            @if(! auth()->user()->appliedTo($this->record))
+                {{ ($this->applyAction)(['viewMode' => true]) }}
 
-        @else
-            {{ ($this->applyAction)(['viewMode' => false]) }}
-            {{ ($this->cancelApplicationAction) }}
+            @else
+                {{ ($this->applyAction)(['viewMode' => false]) }}
+                {{ ($this->cancelApplicationAction) }}
+            @endif
         @endif
     @else
         <div class="flex justify-end">

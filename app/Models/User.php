@@ -7,6 +7,7 @@ use App\Enums\UserTypeEnum;
 use Filament\Forms\Components\Hidden;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -64,6 +65,13 @@ class User extends Authenticatable implements FilamentUser
     public function appliedTo(JobPost $jobPost): bool
     {
         return $this->applications()->where('job_post_id', $jobPost->id)->exists();
+    }
+
+    public function appliedToRecruiter(Recruiter $recruiter): bool
+    {
+        return $recruiter->jobPosts()->whereHas('applications', function ($query) {
+            $query->where('user_id', $this->id);
+        })->exists();
     }
 
     public function ratings(): HasMany

@@ -26,4 +26,9 @@ Route::get('notifications', function () {
     ]);
 })->name('notifications');
 
+
+Route::get('test', function() {
+    Mail::to('muhamedkhx2@gmail.com');
+});
+
 require __DIR__.'/auth.php';
