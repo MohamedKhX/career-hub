@@ -10,12 +10,25 @@ use App\Notifications\AcceptedApplicationNotification;
 use App\Notifications\RejectedApplicationNotification;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
+if(auth()->user()) {
+    Route::get('/', [HomeController::class, 'index'])
+        ->name('home');
 
-Route::get('job-details/{jobPost:id}', function (JobPost $jobPost) {
-    return view('job-details', compact('jobPost'));
-})->name('job-details');
+    Route::get('job-details/{jobPost:id}', function (JobPost $jobPost) {
+        return view('job-details', compact('jobPost'));
+    })->name('job-details');
+} else {
+    Route::get('/', [HomeController::class, 'index'])
+        ->name('home')
+        ->middleware(['auth', 'verified']);
+
+    Route::get('job-details/{jobPost:id}', function (JobPost $jobPost) {
+        return view('job-details', compact('jobPost'));
+    })
+        ->name('job-details')
+        ->middleware(['auth', 'verified']);;
+}
+
 
 Route::get('notifications', function () {
     $user = auth()->user();
